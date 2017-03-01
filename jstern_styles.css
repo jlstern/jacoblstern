@@ -1,21 +1,50 @@
+* {
+	box-sizing: border-box;
+}
 body {
 	background: #b72001;
 	font-family: Roboto;
 	color: white;
 }
 h1 {
-	font-size: 3em;
+	font-size: 46px;
 	margin: 30px;
 }
 ul {
 	list-style: none;
+	font-size: 20px;
+	margin: 0;
 }
-#menu {
-	font-size: 1.2em;
-}
-#menu li {
+li {
 	padding: 3px 0;
 }
 .bold {
 	font-weight: 700;
 }
+.row {
+	clear: both;
+}
+.box {
+	float: left;
+	border: 1px solid black;
+}
+#splash {
+	height: 100px;
+}
+
+/*Changes based on viewport size*/
+	#splash {width: 100%}
+	#menu {width: 100%}
+@media screen and (min-width: 768px) {
+	#splash {width: 50%}
+	#menu {width: 50%}
+}
+@media screen and (min-width: 992px) {
+	#splash {width: 65%}
+	#menu {width: 35%}
+}
+@media screen and (min-width: 1200px) {
+	#splash {width: 70%}
+	#menu {width: 30%}
+}
+
