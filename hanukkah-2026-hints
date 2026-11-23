@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hanukkah 2026 Riddle Hints</title>
+<style>
+  /* ===== PALETTE: swap these to match the riddles site ===== */
+  :root {
+    --bg: #f3f6fc;
+    --surface: #ffffff;
+    --text: #12224a;
+    --muted: #52618a;
+    --accent: #1f3f99;
+    --accent-text: #ffffff;
+    --gold: #b8860b;
+    --border: #c9d3ea;
+    --ok-bg: #eef3ff;
+    --warn-bg: #fff6df;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1433;
+      --surface: #14214a;
+      --text: #eef2ff;
+      --muted: #a7b3d6;
+      --accent: #e6b93c;
+      --accent-text: #0b1433;
+      --gold: #e6b93c;
+      --border: #2c3d73;
+      --ok-bg: #1a2a5c;
+      --warn-bg: #2a2a3a;
+      color-scheme: dark;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.5;
+    padding: 24px 16px 48px;
+  }
+  main { max-width: 520px; margin: 0 auto; }
+  h1 { text-align: center; font-size: 1.9rem; margin: 8px 0 4px; color: var(--gold); letter-spacing: .02em; }
+  .sub { text-align: center; color: var(--muted); margin: 0 0 24px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  label { display: block; font-weight: bold; margin-bottom: 8px; }
+  .row { display: flex; gap: 8px; }
+  input {
+    flex: 1; min-width: 0;
+    font: inherit; font-size: 1.1rem;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+  }
+  button {
+    font: inherit; font-weight: bold;
+    padding: 10px 18px;
+    border: 0; border-radius: 8px;
+    background: var(--accent); color: var(--accent-text);
+    cursor: pointer;
+  }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  #result { margin-top: 18px; padding: 14px 16px; border-radius: 10px; display: none; }
+  #result.ok { display: block; background: var(--ok-bg); border-left: 4px solid var(--gold); }
+  #result.warn { display: block; background: var(--warn-bg); border-left: 4px solid var(--muted); }
+  #result h2 { margin: 0 0 6px; font-size: 1.05rem; color: var(--gold); }
+  #result p { margin: 0; }
+  .candles { display: flex; justify-content: center; gap: 10px; margin: 0 0 20px; }
+  .candle { width: 10px; height: 34px; background: var(--border); border-radius: 3px; position: relative; }
+  .candle.lit { background: var(--gold); }
+  .candle.lit::before {
+    content: ""; position: absolute; left: 50%; top: -12px; transform: translateX(-50%);
+    width: 8px; height: 11px; background: var(--gold); border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  }
+  .note { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 18px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Hanukkah 2026</h1>
+  <p class="sub">Riddle Hints</p>
+
+  <div class="candles" id="candles" aria-hidden="true"></div>
+
+  <div class="card">
+    <label for="day">Enter a night number (1–8)</label>
+    <div class="row">
+      <input id="day" type="number" inputmode="numeric" min="1" max="8" placeholder="e.g. 3">
+      <button id="go" type="button">Get hint</button>
+    </div>
+    <div id="result" role="status" aria-live="polite"></div>
+  </div>
+
+  <p class="note">Each night's hint unlocks at 4:00 PM Eastern Standard Time.</p>
+</main>
+
+<script>
+  // ===== EDIT THESE: one hint per night =====
+  var HINTS = [
+    "Night 1 hint goes here.",
+    "Night 2 hint goes here.",
+    "Night 3 hint goes here.",
+    "Night 4 hint goes here.",
+    "Night 5 hint goes here.",
+    "Night 6 hint goes here.",
+    "Night 7 hint goes here.",
+    "Night 8 hint goes here."
+  ];
+
+  // Testing hint: entering 69 always shows this, at any time.
+  var SECRET_HINT = "Secret hint goes here.";
+
+  // Night 1 = Friday, December 4, 2026 (month is 0-indexed: 11 = December).
+  // Each hint unlocks at 4:00 PM Eastern Standard Time (UTC-5) = 21:00 UTC.
+  var UNLOCK_HOUR_EST = 16;
+  function unlockTime(night) {
+    return new Date(Date.UTC(2026, 11, 4 + (night - 1), UNLOCK_HOUR_EST + 5, 0, 0));
+  }
+
+  // Eastern Standard Time = UTC-5 (Etc/GMT+5 is that fixed offset).
+  var fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Etc/GMT+5",
+    weekday: "long", month: "long", day: "numeric", hour: "numeric", minute: "2-digit"
+  });
+
+  function show(cls, title, text) {
+    var box = document.getElementById("result");
+    box.className = cls;
+    box.innerHTML = "";
+    var h = document.createElement("h2");
+    h.textContent = title;
+    var p = document.createElement("p");
+    p.textContent = text;
+    box.appendChild(h);
+    box.appendChild(p);
+  }
+
+  function lookup() {
+    var raw = document.getElementById("day").value.trim();
+    if (raw === "69") {
+      show("ok", "Secret hint", SECRET_HINT);
+      return;
+    }
+    if (!/^[1-8]$/.test(raw)) {
+      show("warn", "Hmm…", "Please enter a whole number from 1 to 8.");
+      return;
+    }
+    var night = parseInt(raw, 10);
+    var when = unlockTime(night);
+    if (new Date() >= when) {
+      show("ok", "Night " + night + " hint", HINTS[night - 1]);
+    } else {
+      show("warn", "Not yet!", "The hint for Night " + night + " unlocks " + fmt.format(when) + " EST.");
+    }
+  }
+
+  function drawCandles() {
+    var wrap = document.getElementById("candles");
+    var now = new Date();
+    for (var i = 1; i <= 8; i++) {
+      var c = document.createElement("div");
+      c.className = "candle" + (now >= unlockTime(i) ? " lit" : "");
+      wrap.appendChild(c);
+    }
+  }
+
+  document.getElementById("go").addEventListener("click", lookup);
+  document.getElementById("day").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") lookup();
+  });
+  drawCandles();
+</script>
+</body>
+</html>
