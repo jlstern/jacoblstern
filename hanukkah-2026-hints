@@ -111,14 +111,14 @@
 <script>
   // ===== EDIT THESE: one hint per night =====
   var HINTS = [
-    "Night 1 hint goes here.",
-    "Night 2 hint goes here.",
-    "Night 3 hint goes here.",
-    "Night 4 hint goes here.",
-    "Night 5 hint goes here.",
-    "Night 6 hint goes here.",
-    "Night 7 hint goes here.",
-    "Night 8 hint goes here."
+    "The underlined word is key.",
+    "Word before run or work.",
+    "Sometimes paired with the answer to Riddle #1.",
+    "From another country.",
+    "Three words; creative, unconventional thinking.",
+    "Sometimes paired with the answer to Riddle #1 or Riddle #3.",
+    "This riddle would make more sense if the gifts were actually a big bag of gold coins, but it’s hard to find dairy-free gelt!",
+    "An expression of puzzlement, such as an eyebrow raise. Includes a lot of high-scoring Scrabble letters."
   ];
 
   // Testing hint: entering 69 always shows this, at any time.
